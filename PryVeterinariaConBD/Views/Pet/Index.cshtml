@@ -1,0 +1,83 @@
+﻿@using PryVeterinariaConBD.Models.ViewModel
+@model List<PetFile>
+
+<h3 class="text-center" style="margin:20px">Listado de fichas incresadas</h3>
+
+<div class="card">
+    <div class="card-header">
+    <h6>Fichas</h6>
+    </div>
+    <div class="card-body">
+       <form action="/pet/Index" method="post"> 
+        <div class="row mb-1">
+          <div class="col-2">
+              <label for="PetKind">Tipo mascota: </label>
+          </div>
+          <div class="col-4">
+              <select  asp-items="ViewBag.PetTypes"class="form-control d-inline-block" name="IdTypes">
+                  <option selected disabled>--Seleccionar--</option>
+              </select>
+          </div>
+          <div class="col-2">
+              <label name="PetName" for="PetName">Nombre mascota: </label>
+          </div>
+          <div class="col-4">
+                <input name="PetName" for="PetName" class="form-control" placeholder="thor"/>
+          </div>
+          
+        </div>
+            <button type="submit" class="btn btn-primary btn-sm" style="margin-bottom:10px;float:right; margin-top:10px ">Buscar</button>
+        </form>
+        
+        @if (Model.Count == 0)
+        {
+            <div class="alert alert-info">No existen datos para mostrar</div>
+        }
+        else
+        {
+            <form action="/pet/Index" method="get">
+               <table class="table table-bordered table-hover">
+            <thead class="table-dark text-center">
+                    <tr>
+                        <th>
+                            Nombre mascota
+                        </th>
+                        <th>
+                            Tipo mascota
+                        </th>
+                        <th>
+                            Nombre dueño
+                        </th>
+                        <th>
+                            Telefono dueño
+                        </th>
+                        <th>
+                            <input type="hidden" value="" name="IdType" />
+                        </th>
+                    </tr>
+            </thead>
+            
+                @foreach (var pet in Model)
+               {
+                 <tbody class="text-center">
+                     <tr>
+                         <input type="hidden" value="@pet.Id" name="PetId"/>
+                         <td>@pet.Name</td>
+                         <td>@pet.IdTypeNavigation.Type1</td>
+                         <td>@pet.OwnerName</td>
+                         <td>@pet.OwnerPhone</td>
+                         <td><a asp-action="Check" class="btn btn-primary btn-sm"asp-route-PetId="@pet.Id" style="border:none;background:none;outline:none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg></a>
+                         </td>
+                     </tr>
+                 </tbody>
+               }
+                </table> 
+            </form>
+        }
+        <div class="text-right">
+                <p>Cantidad de mascotas: @Model.Count</p>
+        </div>
+    </div>
+</div>

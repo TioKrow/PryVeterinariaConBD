@@ -1,0 +1,55 @@
+﻿@model PryVeterinariaConBD.Models.ViewModel.PetFilesViewModel
+<h3 class="text-center" style="margin:20px">Ingresar nueva ficha</h3>
+
+<div class="card">
+    <div class="card-header">
+    <h6>Nueva Ficha</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            <div class="row mb-1" style="padding-bottom:10px">
+                <div class="col-2">
+                    <label for="Name">Nombre mascota: </label>
+                </div>
+                <div class="col-3">
+                      <input pattern="[a-zA-Z]{1,15}" type="text" placeholder="Bobby" name="Name"
+                       title="EL nombre de la mascota no puede contener mas de 15 letras" class="form-control" required />
+                </div>
+                 <div class="col-2">
+                    <label for="OwnerName">Nombre dueño: </label>
+                </div>
+                <div class="col-3">
+                      <input placeholder="Pedro" type="text" name="OwnerName" class="form-control"
+                        pattern="[a-zA-Z]{1,30}"  title="EL nombre del dueño no puede contener mas de 30 letras" required />
+                </div>
+            </div>
+            <div class="row mb-2" style="padding-bottom:10px">
+                <div class="col-2">
+                    <label for="BirthdayDate">Fecha nacimiento:</label>
+                </div>
+                <div class="col-3">
+                      <input type="date" min="2000-01-01" max=@Convert.ToString(DateTime.Now.ToShortDateString()) name="BirthdayDate" class="form-control" required />
+                </div>
+                 <div class="col-2">
+                    <label for="OwnerPhone">Telefono contacto: </label>
+                </div>
+                <div class="col-3">
+                      <input name="OwnerPhone" placeholder="+56912312312" type="tel" class="form-control" 
+                       pattern="[+]([0-9]{11})" title="El formato de celular es +xxxxxxxxxxx" required/>
+                </div>
+            </div>
+             <input name="Date" type="hidden" class="form-control" value="@DateTime.Today">
+            <div class="row mb-3">
+                <div class="col-2">
+                <label for="IdType">Tipo mascota:</label>
+                </div>  
+                <div class="col-3" >
+                   <select asp-for="IdType" class="form-control" asp-items="ViewBag.PetTypes"><option value="">--Seleccionar--</option></select>
+                </div>
+                <div style="margin-left:360px">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
