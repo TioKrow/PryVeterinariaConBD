@@ -11,7 +11,7 @@
        <form action="/pet/Index" method="post"> 
         <div class="row mb-1">
           <div class="col-2">
-              <label for="PetKind">Tipo mascota: </label>
+              <label for="Type1">Tipo mascota: </label>
           </div>
           <div class="col-4">
               <select  asp-items="ViewBag.PetTypes"class="form-control d-inline-block" name="IdTypes">
@@ -19,14 +19,14 @@
               </select>
           </div>
           <div class="col-2">
-              <label name="PetName" for="PetName">Nombre mascota: </label>
+              <label name="Name" for="PetName">Nombre mascota: </label>
           </div>
           <div class="col-4">
-                <input name="PetName" for="PetName" class="form-control" placeholder="thor"/>
+                <input name="Name" for="PetName" class="form-control" placeholder="thor"/>
           </div>
           
         </div>
-            <button type="submit" class="btn btn-primary btn-sm" style="margin-bottom:10px;float:right; margin-top:10px ">Buscar</button>
+            <button asp-route-name="name" asp-route-type="IdType"   type="submit" class="btn btn-primary btn-sm" style="margin-bottom:10px;float:right; margin-top:10px ">Buscar</button>
         </form>
         
         @if (Model.Count == 0)

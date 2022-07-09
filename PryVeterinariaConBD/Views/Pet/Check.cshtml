@@ -1,0 +1,33 @@
+﻿@model List<PetFile>
+
+<h3 class="text-center" style="margin:20px">Ver ficha</h3>
+
+<div class="card">
+    <div class="card-header">
+    <h6>Ver Ficha</h6>
+    </div>
+    <div class="card-body">
+        <form>
+
+        @foreach (var item in Model)
+       {    <h3 style="text-align:center; ">@item.Name</h3>
+           <div class="container" style="padding:25px">
+                <div class="row align-items-start">
+                    <div class="col-7">
+                      <label for="PetName">Tipo de mascota: @item.IdTypeNavigation.Type1</label> <br>
+                      <label for="BornDate">Fecha de nacimiento: @item.BirthdayDate.ToShortDateString()</label>
+                    </div>
+                    <div class="col">
+                       <label for="OwnerName">Nombre del dueño: @item.OwnerName </label>
+                      <label for="Phone">Telefono de contacto: @item.OwnerPhone</label> <br>
+                      <label for="Date">Fecha de creacion Ficha: @item.CreationDate.ToShortDateString()</label>
+                    </div>
+                </div>
+           </div>
+       }
+            <div class="text-center" >
+               <button type="submit" asp-controller="pet" asp-action="Index" class="btn btn-primary">Volver</button>
+            </div>            
+           </form>
+    </div>
+</div>
